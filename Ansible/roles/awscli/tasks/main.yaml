@@ -1,0 +1,8 @@
+- name: Installing awscli apt dependencies
+  apt:
+    name: ['unzip', 'curl']
+    state: latest
+    update_cache: true
+
+- name: install awscli from script
+  script: /home/qa/Desktop/TestSFIA2/Ansible/roles/awscli/tasks/awscli.sh

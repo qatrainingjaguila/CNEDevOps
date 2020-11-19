@@ -1,0 +1,22 @@
+- name: "Install apt dependencies"
+  apt:
+    name: openjdk-8-jdk
+    state: latest
+    update_cache: true
+    
+- name: "Get GPG Key"
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins.io.key
+    
+- name: ensure the repository is configured
+  apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+  become: yes
+    
+- name: "Install jenkins"
+  apt:
+    name: jenkins
+    state: present
+    update_cache: true
+
+
+

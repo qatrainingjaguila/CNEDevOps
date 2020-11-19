@@ -1,0 +1,8 @@
+- name: Installing compose dependencies
+  apt:
+    name: ['curl']
+    state: latest
+    update_cache: true
+
+- name: install compose from script
+  script: /home/qa/Desktop/TestSFIA2/Ansible/roles/docker-compose/tasks/compose.sh
