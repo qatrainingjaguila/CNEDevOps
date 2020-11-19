@@ -1,0 +1,3 @@
+Terraform/.terraform
+Terraform/RDS/variables.tf
+Terraform/EC2/variables.tf
