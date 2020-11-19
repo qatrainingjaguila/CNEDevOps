@@ -10,7 +10,7 @@ services:
       DATABASE_URI: ${DATABASE_URI}
       TEST_DATABASE_URI: ${TEST_DATABASE_URI}
       SECRET_KEY: ${SECRET_KEY}
-    container_name: frontend
+    container_name: backend
     
   frontend:
     build: ./frontend
@@ -27,5 +27,5 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: ./cne-sfia2-brief/nginx/nginx.conf
+      source: ./nginx/nginx.conf
       target: /etc/nginx/nginx.conf
