@@ -1,9 +1,5 @@
 #!/bin/bash
 
 # ssh in 
-
-# clone the repo
-
-# docker compose up
-
-# pytest
+ssh ubuntu@${TEST_IP} < test.sh
+#

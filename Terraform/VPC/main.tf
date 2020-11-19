@@ -10,18 +10,21 @@ resource "aws_subnet" "publicA" {
   cidr_block        = var.pub-snA-cidr-block
   availability_zone = data.aws_availability_zones.available.names[0]
   vpc_id            = aws_vpc.main.id
+  map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "publicB" {
   cidr_block        = var.pub-snB-cidr-block
   availability_zone = data.aws_availability_zones.available.names[1]
   vpc_id            = aws_vpc.main.id
+  map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "publicC" {
   cidr_block        = var.pub-snC-cidr-block
   availability_zone = data.aws_availability_zones.available.names[0]
   vpc_id            = aws_vpc.main.id
+  map_public_ip_on_launch = true
 }
 
 resource "aws_internet_gateway" "vpc_igw" {
