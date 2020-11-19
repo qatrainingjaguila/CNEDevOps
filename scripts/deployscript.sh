@@ -1,12 +1,8 @@
 #!/bin/bash
 
 echo "calling deployscript. Ensure project namespace and secret.yaml exist"
-ls
 kubectl get namespace
 #kubectl apply
-cd K8S
-ls
-cd ..
 cd K8S
 kubectl apply -f nginx-conf.yaml -n project
 kubectl apply -f secret.yaml -n project
