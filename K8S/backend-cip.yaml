@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend   # this is what default.conf looks for
+  namespace: project
+  labels:
+    app: backend
+spec:
+  selector:
+    app: backend   # looking for pods with the label
+  ports:
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001
+  type: ClusterIP

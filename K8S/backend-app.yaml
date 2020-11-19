@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+apiVersion: apps/v1
+apiVersion: apps/v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: project
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: qatrainingjaguila/my-backenddd
+        ports:
+        - containerPort: 5001
+        env:
+        - name: DATABASE_URI  # The env variable required for the container
+          valueFrom:
+            secretKeyRef:
+              name: pwsecret #the metadata name of the secret it is referring to
+              key: DATABASE_URI #The key of the value we want in the secret yaml file
+        - name: TEST_DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              name: pwsecret
+              key: TEST_DATABASE_URI
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pwsecret
+              key: SECRET_KEY
