@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('test') {
       steps {
-      sh "ssh ubuntu@${TEST_IP} < scripts/test.sh"
+      sh "ssh ubuntu@$34.245.37.14 < scripts/test.sh"
+      sh "ls"
       }
       }
     stage('deploy') {
