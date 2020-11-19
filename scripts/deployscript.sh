@@ -3,7 +3,7 @@
 echo "calling deployscript. Ensure project namespace and secret.yaml exist"
 ls
 kubectl get namespace
-mv secret.yaml /K8s
+sudo mv secret.yaml /K8s
 #kubectl apply
 cd K8S
 ls
