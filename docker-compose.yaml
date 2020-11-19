@@ -10,6 +10,7 @@ services:
       DATABASE_URI: ${DATABASE_URI}
       TEST_DATABASE_URI: ${TEST_DATABASE_URI}
       SECRET_KEY: ${SECRET_KEY}
+    container_name: frontend
     
   frontend:
     build: ./frontend
@@ -17,6 +18,7 @@ services:
     - target: 5000
       published: 5000
       protocol: tcp
+    container_name: frontend
   nginx:
     build: ./nginx
     ports:
