@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#build all images and push to dockerhub
-echo "calling deployscript."
-
+echo "calling deployscript. Ensure project namespace and secret.yaml exist"
+ls
+kubectl get ns
 #kubectl apply
