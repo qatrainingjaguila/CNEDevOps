@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "calling deployscript. Ensure project namespace and secret.yaml exist"
+echo "calling deployscript. Ensure project namespace and secret.yaml exist in K8S"
 cd K8S
 # Running kubernetes deployment commands
 kubectl apply -f nginx-conf.yaml -n project
