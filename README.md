@@ -72,8 +72,6 @@ The ecl emma extension to Spring produces a coverage report to show how much of 
 There are a number of improvements I would like to implement (outside of current bugs):
 * Store Docker credentials in Jenkins credentials
 * Utilise HTTPS
-* 
-* 
 
 ## Authors
 Juan Carlos Aguila
