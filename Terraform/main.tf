@@ -52,3 +52,11 @@ module "ProdRDS" {
     vpc_security_group_ids = [module.aws_webserver_sg.aws_wsg_id]
 
 }
+
+module "EKSCluster" {
+  source = "./EKS"
+  subnet_ids = [module.aws_vpc.public_subnetA_id,module.aws_vpc.public_subnetC_id,module.aws_vpc.public_subnetB_id]
+  EKS_security_group_ids = [module.aws_webserver_sg.aws_wsg_id]
+  nodegroup_subnet_ids = [module.aws_vpc.public_subnetA_id,module.aws_vpc.public_subnetC_id,module.aws_vpc.public_subnetB_id]
+  remote_SG_ids = [module.aws_webserver_sg.aws_wsg_id]
+}

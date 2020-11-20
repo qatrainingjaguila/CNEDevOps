@@ -11,6 +11,7 @@ resource "aws_subnet" "publicA" {
   availability_zone = data.aws_availability_zones.available.names[0]
   vpc_id            = aws_vpc.main.id
   map_public_ip_on_launch = true
+
 }
 
 resource "aws_subnet" "publicB" {

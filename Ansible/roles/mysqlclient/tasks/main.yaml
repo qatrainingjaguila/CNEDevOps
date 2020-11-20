@@ -1,0 +1,5 @@
+- name: Installing mysqlclient
+  apt:
+    name: ['mysql-client-core-5.7']
+    state: latest
+    update_cache: true
