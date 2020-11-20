@@ -6,13 +6,10 @@
 ## Contents
 * [Brief](#brief)
    * [Additional Requirements](#additional-requirements)
-   * [My Approach](#my-approach)
 * [Architecture](#architecture)
-   * [Database Structure](#database-structure)
+   * [Infrastructure](#Infrastructure)
 * [Project Tracking](#project-tracking)
-* [Risk Assessment](#risk-assessment)
 * [Testing](#testing)
-* [Front-End Design](#front-end-design)
 * [Known Issues](#known-issues)
 * [Future Improvements](#future-improvements)
 * [Authors](#authors)
@@ -20,56 +17,45 @@
 ## Brief
 The brief provided to us for this project sets the following out as its overall objective:
 "This application is a simple Flask application, ready to be deployed, for your SFIA2 project."
+The application must:
+* Be deployed to a Virtual Machine for testing
+* Be deployed in a managed Kubernetes CLuster for production
+* Make use of a managed Database solution
 
-In layman's terms this means our applications must use technologies that we have learned over the course of the training and incorporate create, read, update and delete functions as part of its core functionality. 
+In layman's terms this means our applications must use technologies that we have learned over the course of the training in order to continuously test and deploy the application supplied to us
 
 ### Additional Requirements
-In addition to what has been set out in the brief, I am also required to include the following:
+In addition to what has been set out in the brief, I am also expected to achieve additional requirements which are as follows:
 * A JIRA Kanban board
-* A relational database using H2, hosted on a GCP SQL Server if possible
-* A detailed Risk Assessment and clear documentation of the design phase describing architecture
-* A functional application created in Java, following best practices which must meet the requirements set on my JIRA board
-* Test suites for the application, which will include automated tests for validation of the application
-* A front-end websitd and integrated API
-* Code integrated into a Version Control System
-
-### My Approach
-To achieve this, I have decided to produce a simple stargazing companion app that must allow the user to do the following:
-* Create a user account (satisfying 'Create') that stores:
-   * *Account Number*
-   * *First and Last Name*
-   * *Password*
-* Make payments to other users (satisfying 'Create') with the following information:
-   * *Amount* of the payment
-   * *recipient account Number* of the payment 
-* View and update user account details (satisfies 'Read' and 'Update')
-* Delete their account (satisfies 'Delete')
-
-Additionally, I would like to allow the user to:
-* View all payments they have made in the past
+* The application must be deployed using containerisation and orchestration tools
+* The application must be tested through the CI pipeline
+* The project must make use of two managed Database Servers: 1 for Testing and 1 for Production.
+* If a change is made to the code base, Webhooks should be used so that Jenkins recreates and redeploys the changed application.
+* The infrastructure for the project should be configured using an infrastructure management tool (Infrastructure as Code).
+* As part of the project, you need to create an Ansible Playbook that will provision the environment that your CI Server needs to run.
+* The project must make use of a reverse proxy to make your application accessible to the user.
 
 ## Architecture
-### Database Structure
-Pictured below is an entity relationship diagram (ERD) showing the structure of the database.
+### Infrastructure
+Pictured below is an infrastructure diagram showing the architecture of your database.
 
 
 ![ERD][erd1]
 
 
 
-As shown in the ERD, the app models a one-to-many relationship between User entities and Payment entities using an association table. This allows the user to create Payments associated with their user ID.
+The application is a Flask app running in 2 microservices(frontend and backend).
+* When a request is made to the app, the frontend service makes a GET request to the backend service.
+* The backend service using a database connection to quey the database and return a result.
+* The frontend service serving up a simple HTML (index.html) to display the result
 
 
 ## Project Tracking
 JIRA was used to track the progress of the project (pictured below). 
-Here's the link to the board:https://qatraineejaguila.atlassian.net/jira/software/projects/PO/boards/2
+Here's the link to the board:https://qatraineejaguila.atlassian.net/jira/software/projects/PD/boards/4
 
 ![trello][trello]
 
-
-## Risk Assessment
-
-![RiskAssessment][riskassessment]
 
 ## Testing
 JUnit is used to run unit tests on the app. These are designed to assert that if a certain function is run, the output should be a known value.
@@ -78,42 +64,20 @@ The ecl emma extension to Spring produces a coverage report to show how much of 
 
 ![coverage][coverage]
 
-## Front-End Design
-The front-end of the app is built using HTML, CSS and Javascript with an integrated API.
-
-When the user navigates to the URL, they are directed to the home page:
-
-![homeloggedout][homeloggedout]
-
-Users then sign up on the associated page:
-
-![signup][signup]
-
-Once signed up, they then receive an account number which they use to sign in and log in to see the account page:
-
-![login][login]
+## User Documentation
 
 
-## Known Issues
-There are a few bugs with the current build of the app:
-* Currently the data transfer objects used to return the same attributes as the objects themselves. This includes the password, which is a security risk.
-* Passwords are stored as cleartext. I would like to hash these to ensure logins are secure.
-* Random account number generators and login functions are not tested due to time constraints.
 
 ## Future Improvements
 There are a number of improvements I would like to implement (outside of current bugs):
-* The database should be hosted on a GCP SQL Server
-* I would like for the users to be able to display all payments, and possibly cancel them
-* I would also like users to be able to record more information like an email address, phone number and a username
-* I want a pop up to show up for the delete account feature, asking whether users are sure they want to delete their account.
+* Store Docker credentials in Jenkins credentials
+* Utilise HTTPS
+* 
+* 
 
 ## Authors
 Juan Carlos Aguila
 
-[erd1]: https://i.imgur.com/bHa7pFw.png
-[riskassessment]: https://i.imgur.com/p4ZAufX.png
-[coverage]: https://i.imgur.com/gWyRPfI.png
-[trello]: https://i.imgur.com/eNVwpFG.png
-[homeloggedout]: https://i.imgur.com/Ol4O1wG.png
-[signup]: https://i.imgur.com/XyGMkmg.png
-[login]: https://i.imgur.com/gmBxlRT.png
+[erd1]: 
+[coverage]: 
+[trello]: 
