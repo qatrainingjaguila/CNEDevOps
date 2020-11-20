@@ -1,7 +1,7 @@
 #! /bin/bash
 #clone repo
 echo "Cloning"
-git clone --branch develop https://github.com/qatrainingjaguila/CNEDevOps.git
+git clone --branch main https://github.com/qatrainingjaguila/CNEDevOps.git
 cd CNEDevOps
 #run app
 sudo docker-compose up -d
