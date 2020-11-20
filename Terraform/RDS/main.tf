@@ -10,8 +10,8 @@ resource "aws_db_instance" "testdb" {
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
   name                 = var.dbname
-  username             = "admin"
-  password             = "Passpass999"
+  username             = var.username
+  password             = var.pass
   parameter_group_name = "default.mysql5.7"
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name = var.dbsubnet_groupname
