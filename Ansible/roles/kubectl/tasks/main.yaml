@@ -1,2 +1,2 @@
 - name: install kubectl from script
-  script: /home/qa/Desktop/TestSFIA2/Ansible/roles/kubectl/tasks/kubectl.sh
+  script: /home/qa/Desktop/GITSFIA2/Ansible/roles/kubectl/tasks/kubectl.sh

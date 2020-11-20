@@ -5,4 +5,4 @@
     update_cache: true
 
 - name: install awscli from script
-  script: /home/qa/Desktop/TestSFIA2/Ansible/roles/awscli/tasks/awscli.sh
+  script: /home/qa/Desktop/GITSFIA2/Ansible/roles/awscli/tasks/awscli.sh
