@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('run tests') {
+    stage('Run tests') {
       steps {
       sh "ssh -oStrictHostKeyChecking=no ubuntu@34.245.37.14 < scripts/test.sh"
       sh "ls"
