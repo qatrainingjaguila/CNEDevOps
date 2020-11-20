@@ -3,4 +3,5 @@ Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
 Terraform/RDS/variables.tf
 Terraform/EC2/variables.tf
+Terraform/EKS/variables.tf
 K8S/secret.yaml
