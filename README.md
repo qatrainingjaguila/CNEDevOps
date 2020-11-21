@@ -48,6 +48,7 @@ Here's the link to the board:https://qatraineejaguila.atlassian.net/jira/softwar
 
 ## Testing
 The app is tested using pytest. The repo is cloned into a VM and run with docker-compose, connecting to a test RDS database.
+Below is a coverage report that can be output by pytest.
 
 ![coverage][coverage]
 
