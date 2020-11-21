@@ -26,7 +26,7 @@ In addition to what has been set out in the brief, I am also expected to achieve
 
 ## Architecture
 ### Infrastructure
-Pictured below is an infrastructure diagram showing the architecture of your database.
+Pictured below is an infrastructure diagram showing the architecture.
 
 
 ![ERD][erd1]
