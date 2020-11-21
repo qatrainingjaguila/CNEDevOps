@@ -60,6 +60,7 @@ An template is included in the K8S folder. The instances are set up to utilise a
 After Terraform has completed, you will need to set up the environments for the Test VM and CI Server. We will use Ansible to do this.
 Use the following command structure along with the output of the Terraform apply to get the outputs for the Jenkins and test VMs.
 Using the terraform output, replace the DATABASE_URI and TEST_DATABASE_URI in the secret.yaml, which is required for Kubernetes.
+The SSH IP in the Jenkinsfile will also need to be replaced with the IP of the Test VM
 
 _ansible-playbook -i 'jenkins ip' --user ubuntu CIplaybook.yaml_
 
