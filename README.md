@@ -111,8 +111,8 @@ There are a number of improvements I would like to implement (outside of current
 ## Authors
 Juan Carlos Aguila
 
-[erd1]: [img]https://i.imgur.com/kd02nd3.png[/img]
-[coverage]: [img]https://i.imgur.com/wfmA2u1.png[/img]
-[trello]: [img]https://i.imgur.com/dd9pe6h.png[/img]
-[terraform]: [img]https://i.imgur.com/FMEtnzx.png[/img]
-[database]: [img]https://i.imgur.com/oCGsesY.png[/img]
+[erd1]: https://i.imgur.com/kd02nd3.png
+[coverage]: https://i.imgur.com/wfmA2u1.png
+[trello]: https://i.imgur.com/dd9pe6h.png
+[terraform]: https://i.imgur.com/FMEtnzx.png
+[database]: https://i.imgur.com/oCGsesY.png
