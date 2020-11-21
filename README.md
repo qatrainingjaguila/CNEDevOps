@@ -58,25 +58,25 @@ An template is included in the K8S folder. The instances are set up to utilise a
 
 ### Post Terraform
 After Terraform has completed, you will need to set up the environments for the Test VM and CI Server. We will use Ansible to do this.
-Use the following command structure along with the output of the Terraform apply to get the outputs for the Jenkins and test VMs.
 Using the terraform output(an example shown below), replace the DATABASE_URI and TEST_DATABASE_URI in the secret.yaml, which is required for Kubernetes.
-The SSH IP in the Jenkinsfile will also need to be replaced with the IP of the Test VM
+The SSH IP in the Jenkinsfile will also need to be replaced with the IP of the Test VM.
 
 ![terraform][terraform]
 
+Use the following command structure along with the output of the Terraform apply to get the outputs for the Jenkins and test VMs.
 _ansible-playbook -i 'jenkins ip' --user ubuntu CIplaybook.yaml_
 
 Repeat this using the IP for the Test VM with the same user, using TestVMplaybook.yaml.
 
 Once this has completed, the following steps must be taken to set up the environment:
 * SSH into the Jenkins VM as ubuntu
-* Set the jenkins user password with _sudo passwd jenkins_ with ALL=(ALL:ALL) NOPASSWD:ALL
-* Add jenkins to sudoers and the docker group
+* Set the jenkins user password with _sudo passwd jenkins_
+* Add jenkins to sudoers with ALL=(ALL:ALL) NOPASSWD:ALL and to the docker group _sudo usermod -aG docker jenkins_
 * Switch to jenkins user 
 * Login to docker hub with _sudo docker login_
 * Authenticate with aws cli and connect to the cluster with the cluster name you set in Terraform
 _aws eks --region xxx update-kubeconfig --name xxx_
-* To test create the project namespace with _kubectl create ns project_
+* To test create the project namespace with _kubectl create ns project_. This is required for the app to deploy to Kubernetes
 * Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
 We will also manually set up the databases(using the endpoints specified in the uri output):
