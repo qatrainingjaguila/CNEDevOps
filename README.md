@@ -111,7 +111,7 @@ There are a number of improvements I would like to implement (outside of current
 * Deploy using the Kubernetes plugin
 
 ## Authors
-Juan Carlos Aguila
+Carlos Aguila
 
 ## Acknowledgements
 Luke Benson, DevOps trainer
