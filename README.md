@@ -67,28 +67,31 @@ Repeat this using the IP for the Test VM with the same user, using TestVMplayboo
 
 Once this has completed, the following steps must be taken to set up the environment:
 * SSH into the Jenkins VM as ubuntu
+* Set the jenkins user password with _sudo passwd jenkins_ with ALL=(ALL:ALL) NOPASSWD:ALL
 * Add jenkins to sudoers and the docker group
 * Switch to jenkins user 
-* Login to docker hub
+* Login to docker hub with _sudo docker login_
 * Authenticate with aws cli and connect to the cluster with the cluster name you set in Terraform
-* Retrieve the initial admin password from /var/lib/jenkins/secrets/initialAdminPassword
+_aws eks --region xxx update-kubeconfig --name xxx_
+* Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
 We will also manually set up the databases(using the endpoints specified in the uri output):
-Do this for both endpoints.
-_mysql -h amazonrdsendpoint -P 3306 -u admin -ppassword < database/.Create.sql_ 
+Copy/run the Create.sql script in both endpoints to create the test and user databases.
+_mysql -h amazonrdsendpoint -P 3306 -u admin -p_ 
 
 ### Test VM setup
-Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in jenkins user
-and copied to the .ssh/authorized_keys file to allow this.
-The ubuntu user will need to be added to the docker group and sudoers, which need a reload to take effect.
+Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in the jenkins user
+and the public key copied to the .ssh/authorized_keys file to allow this.
+Add the user _ubuntu_ to the docker group, which need a reload to take effect.
 Docker compose will need to be made executable with _sudo chmod +x /usr/local/bin/docker-compose_
 Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in etc/profile.
 
 ### Jenkins
 Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
 Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using the jenkins_ip:8080/github-webhook/
+Create the secret file credential 'KUBE_SECRET_FILE' and upload secret.yaml with the new URIs
 
-After an initial build, the final step is to create the project namespace and copy the secret.yaml file into the /workspace/PIPELINE_NAME/K8S directory.
+After an initial build, the final step is to create the project namespace and copy the secret.yaml(with new URIs added) into the /workspace/PIPELINE_NAME/K8S directory.
 This will provide the environment variables for the Cluster, and will not be touched since Jenkins only updates the repo.
 
 The pipeline has now been set up.
