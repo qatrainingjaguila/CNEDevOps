@@ -18,5 +18,6 @@ spec:
       containers:
       - name: flask-app
         image: qatrainingjaguila/my-frontendd
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 5000
