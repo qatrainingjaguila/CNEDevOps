@@ -11,7 +11,7 @@ The application must:
 * Be deployed in a managed Kubernetes CLuster for production
 * Make use of a managed Database solution
 
-In layman's terms this means our applications must use technologies that we have learned over the course of the training in order to continuously test and deploy the application supplied to us
+In layman's terms this means our applications must use technologies that we have learned over the course of the training in order to continuously test and deploy the application supplied to us.
 
 ### Additional Requirements
 In addition to what has been set out in the brief, I am also expected to achieve additional requirements which are as follows:
