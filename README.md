@@ -3,17 +3,6 @@
 ### Resources:
 * JIRA Board: https://qatraineejaguila.atlassian.net/secure/RapidBoard.jspa?rapidView=1&projectKey=PCI&view=planning&selectedIssue=PCI-7&epics=visible&issueLimit=100
 
-## Contents
-* [Brief](#brief)
-   * [Additional Requirements](#additional-requirements)
-* [Architecture](#architecture)
-   * [Infrastructure](#Infrastructure)
-* [Project Tracking](#project-tracking)
-* [Testing](#testing)
-* [Known Issues](#known-issues)
-* [Future Improvements](#future-improvements)
-* [Authors](#authors)
-
 ## Brief
 The brief provided to us for this project sets the following out as its overall objective:
 "This application is a simple Flask application, ready to be deployed, for your SFIA2 project."
@@ -58,20 +47,59 @@ Here's the link to the board:https://qatraineejaguila.atlassian.net/jira/softwar
 
 
 ## Testing
-JUnit is used to run unit tests on the app. These are designed to assert that if a certain function is run, the output should be a known value.
-
-The ecl emma extension to Spring produces a coverage report to show how much of the code in the app has been successfully tested. This is shown below
+The app is tested using pytest. The repo is cloned into a VM and run with docker-compose, connecting to a test RDS database.
 
 ![coverage][coverage]
 
 ## User Documentation
+Terraform is used to provision the AWS infrastructure. It is worth noting that the variables files for the EC2 and RDS modules are not on Github,
+so need to be manually defined and created. In addition to this, a secret.yaml file needs to be created in order for the app to be deployed to Kubernetes.
+An template is included in the K8S folder. The instances are set up to utilise an existing key pair, so ensure these are set in the variables.
 
+### Post Terraform
+After Terraform has completed, you will need to set up the environments for the Test VM and CI Server. We will use Ansible to do this.
+Use the following command structure along with the output of the Terraform apply to get the outputs for the Jenkins and test VMs.
+Using the terraform output, replace the DATABASE_URI and TEST_DATABASE_URI in the secret.yaml, which is required for Kubernetes.
+
+_ansible-playbook -i 'jenkins ip' --user ubuntu CIplaybook.yaml_
+
+Repeat this using the IP for the Test VM with the same user, using TestVMplaybook.yaml.
+
+Once this has completed, the following steps must be taken to set up the environment:
+* SSH into the Jenkins VM as ubuntu
+* Add jenkins to sudoers and the docker group
+* Switch to jenkins user 
+* Login to docker hub
+* Authenticate with aws cli and connect to the cluster with the cluster name you set in Terraform
+* Retrieve the initial admin password from /var/lib/jenkins/secrets/initialAdminPassword
+
+We will also manually set up the databases(using the endpoints specified in the uri output):
+Do this for both endpoints.
+_mysql -h amazonrdsendpoint -P 3306 -u admin -ppassword < database/.Create.sql_ 
+
+### Test VM setup
+Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in jenkins user
+and copied to the .ssh/authorized_keys file to allow this.
+The ubuntu user will need to be added to the docker group and sudoers, which need a reload to take effect.
+Docker compose will need to be made executable with _sudo chmod +x /usr/local/bin/docker-compose_
+Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in etc/profile.
+
+### Jenkins
+Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
+Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using the jenkins_ip:8080/github-webhook/
+
+After an initial build, the final step is to create the project namespace and copy the secret.yaml file into the /workspace/PIPELINE_NAME/K8S directory.
+This will provide the environment variables for the Cluster, and will not be touched since Jenkins only updates the repo.
+
+The pipeline has now been set up.
 
 
 ## Future Improvements
 There are a number of improvements I would like to implement (outside of current bugs):
 * Store Docker credentials in Jenkins credentials
+* Make use of the Docker plugin
 * Utilise HTTPS
+* Deploy using the Kubernetes plugin
 
 ## Authors
 Juan Carlos Aguila
