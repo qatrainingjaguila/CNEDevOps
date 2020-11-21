@@ -59,8 +59,10 @@ An template is included in the K8S folder. The instances are set up to utilise a
 ### Post Terraform
 After Terraform has completed, you will need to set up the environments for the Test VM and CI Server. We will use Ansible to do this.
 Use the following command structure along with the output of the Terraform apply to get the outputs for the Jenkins and test VMs.
-Using the terraform output, replace the DATABASE_URI and TEST_DATABASE_URI in the secret.yaml, which is required for Kubernetes.
+Using the terraform output(an example shown below), replace the DATABASE_URI and TEST_DATABASE_URI in the secret.yaml, which is required for Kubernetes.
 The SSH IP in the Jenkinsfile will also need to be replaced with the IP of the Test VM
+
+![terraform][terraform]
 
 _ansible-playbook -i 'jenkins ip' --user ubuntu CIplaybook.yaml_
 
@@ -80,6 +82,9 @@ _aws eks --region xxx update-kubeconfig --name xxx_
 We will also manually set up the databases(using the endpoints specified in the uri output):
 Copy in/run the Create.sql script in both endpoints to create the test and user databases.
 _mysql -h amazonrdsendpoint -P 3306 -u admin -p_ 
+Copying the sql script in should look similar to below:
+
+![database][database]
 
 ### Test VM setup
 Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in the jenkins user
@@ -92,7 +97,7 @@ Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and S
 Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
 Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using jenkins_ip:8080/github-webhook/
 Create the secret file credential 'KUBE_SECRET_FILE' and upload secret.yaml with the new URIs
-
+_Credentials > System > Global Credentials > Add credentials_
 The pipeline has now been set up.
 
 
@@ -106,6 +111,8 @@ There are a number of improvements I would like to implement (outside of current
 ## Authors
 Juan Carlos Aguila
 
-[erd1]: 
-[coverage]: 
-[trello]: 
+[erd1]: [img]https://i.imgur.com/kd02nd3.png[/img]
+[coverage]: [img]https://i.imgur.com/wfmA2u1.png[/img]
+[trello]: [img]https://i.imgur.com/dd9pe6h.png[/img]
+[terraform]: [img]https://i.imgur.com/FMEtnzx.png[/img]
+[database]: [img]https://i.imgur.com/oCGsesY.png[/img]
