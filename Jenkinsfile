@@ -17,7 +17,6 @@ pipeline {
       }  
     stage('deploy') {
       steps {
-      sh "kubectl create ns project"
       sh "kubectl apply -f $KUBE_SECRET -n project"  
       sh "./scripts/deployscript.sh"
       }

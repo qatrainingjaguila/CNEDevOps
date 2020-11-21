@@ -73,6 +73,7 @@ Once this has completed, the following steps must be taken to set up the environ
 * Login to docker hub with _sudo docker login_
 * Authenticate with aws cli and connect to the cluster with the cluster name you set in Terraform
 _aws eks --region xxx update-kubeconfig --name xxx_
+* To test create the project namespace with _kubectl create ns project_
 * Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
 We will also manually set up the databases(using the endpoints specified in the uri output):
