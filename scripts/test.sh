@@ -4,6 +4,7 @@ echo "Cloning"
 git clone --branch main https://github.com/qatrainingjaguila/CNEDevOps.git
 cd CNEDevOps
 #run app
+echo "Connecting to.." 
 echo ${DATABASE_URI}
 sudo -E DATABASE_URI=${DATABASE_URI} -E TEST_DATABASE_URI=${TEST_DATABASE_URI} -E SECRET_KEY=${SECRET_KEY} docker-compose up -d
 #docker exec run pytest

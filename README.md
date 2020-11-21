@@ -78,23 +78,20 @@ _aws eks --region xxx update-kubeconfig --name xxx_
 * Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
 We will also manually set up the databases(using the endpoints specified in the uri output):
-Copy/run the Create.sql script in both endpoints to create the test and user databases.
+Copy in/run the Create.sql script in both endpoints to create the test and user databases.
 _mysql -h amazonrdsendpoint -P 3306 -u admin -p_ 
 
 ### Test VM setup
 Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in the jenkins user
-and the public key copied to the .ssh/authorized_keys file to allow this.
+and the public key copied to the .ssh/authorized_keys file in the Test VM to allow this.
 Add the user _ubuntu_ to the docker group, which need a reload to take effect.
 Docker compose will need to be made executable with _sudo chmod +x /usr/local/bin/docker-compose_
-Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in etc/profile.
+Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in /etc/profile 
 
 ### Jenkins
 Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
-Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using the jenkins_ip:8080/github-webhook/
+Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using jenkins_ip:8080/github-webhook/
 Create the secret file credential 'KUBE_SECRET_FILE' and upload secret.yaml with the new URIs
-
-After an initial build, the final step is to create the project namespace and copy the secret.yaml(with new URIs added) into the /workspace/PIPELINE_NAME/K8S directory.
-This will provide the environment variables for the Cluster, and will not be touched since Jenkins only updates the repo.
 
 The pipeline has now been set up.
 
