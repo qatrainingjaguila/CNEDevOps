@@ -55,7 +55,7 @@ Below is a coverage report that can be output by pytest.
 ## User Documentation
 Terraform is used to provision the AWS infrastructure. It is worth noting that the variables files for the EC2 and RDS modules are not on Github,
 so need to be manually defined and created. In addition to this, a secret.yaml file needs to be created in order for the app to be deployed to Kubernetes.
-An template is included in the K8S folder. The instances are set up to utilise an existing key pair, so ensure these are set in the variables.
+A template is included in the K8S folder. The instances are set up to utilise an existing key pair, so ensure these are set in the variables.
 
 ### Post Terraform
 After Terraform has completed, you will need to set up the environments for the Test VM and CI Server. We will use Ansible to do this.
