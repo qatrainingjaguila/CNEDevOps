@@ -34,8 +34,8 @@ Pictured below is an infrastructure diagram showing the architecture.
 
 Terraform is used to provision the RDS instances, Test VM and CI Server VM.  
 Ansible is used to remotely set up the VM environments and Jenkins is used to automate the testing and deployment.  
-The Jenkins pipeline will be set up using webhooks to trigger a build every time a push is made to the VCS(Github).  
-It will then test the new code, and push to dockerhub if successful.  
+The Jenkins pipeline will be set up using webhooks to trigger a build every time a push is made to the VCS (Github).  
+It will then test the new code, and push to Dockerhub if successful.  
 The latest image is then pulled down by Kubernetes to update the live application.
 
 ## Application
