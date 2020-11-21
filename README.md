@@ -76,7 +76,7 @@ Once this has completed, the following steps must be taken to set up the environ
 * Login to docker hub with _sudo docker login_
 * Authenticate with aws cli and connect to the cluster with the cluster name you set in Terraform
 _aws eks --region xxx update-kubeconfig --name xxx_
-* To test create the project namespace with _kubectl create ns project_. This is required for the app to deploy to Kubernetes
+* To test create the project namespace with _kubectl create ns project_. This is required for the app to deploy to Kubernetes.
 * Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
 We will also manually set up the databases(using the endpoints specified in the uri output):
@@ -96,9 +96,11 @@ Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and S
 ### Jenkins
 Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
 Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using jenkins_ip:8080/github-webhook/
-Create the secret file credential 'KUBE_SECRET_FILE' and upload secret.yaml with the new URIs
+Create the secret file credential 'KUBE_SECRET_FILE' and upload your secret.yaml with the new URIs
 _Credentials > System > Global Credentials > Add credentials_
-The pipeline has now been set up.
+
+
+The pipeline has now been set up. Run a test build to ensure the pipeline has been configured correctly.
 
 
 ## Future Improvements
@@ -110,6 +112,9 @@ There are a number of improvements I would like to implement (outside of current
 
 ## Authors
 Juan Carlos Aguila
+
+## Acknowledgements
+Luke Benson, DevOps trainer
 
 [erd1]: https://i.imgur.com/kd02nd3.png
 [coverage]: https://i.imgur.com/wfmA2u1.png
