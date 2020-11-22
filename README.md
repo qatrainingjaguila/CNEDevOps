@@ -114,6 +114,7 @@ The pipeline has now been set up. Run a test build to ensure the pipeline has be
 There are a number of improvements I would like to implement (outside of current bugs):
 * Store Docker credentials in Jenkins credentials
 * Make use of the Docker plugin
+* Automate database creation
 * Utilise HTTPS
 * Deploy using the Kubernetes plugin
 
