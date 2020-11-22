@@ -96,8 +96,7 @@ Copying the sql script in should look similar to below:
 ### Test VM setup
 Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in the jenkins user
 and the public key copied to the .ssh/authorized_keys file in the Test VM to allow this.
-Add the user _ubuntu_ to the docker group, which need a reload to take effect.
-Docker compose will need to be made executable with _sudo chmod +x /usr/local/bin/docker-compose_
+Add the user _ubuntu_ to the docker group.
 Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in /etc/profile 
 
 ### Jenkins
