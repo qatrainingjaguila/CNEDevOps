@@ -59,8 +59,8 @@ Below is a coverage report that can be output by pytest.
 ![coverage][coverage]
 
 ## User Documentation
-Terraform is used to provision the AWS infrastructure. It is worth noting that the variables files for the EC2 and RDS modules are not on Github,
-so need to be manually defined and created. In addition to this, a secret.yaml file needs to be created in order for the app to be deployed to Kubernetes.
+Terraform is used to provision the AWS infrastructure. It is worth noting that the variables files for the EC2 and RDS modules are not on Github, so need to be manually defined and created.  
+In addition to this, a secret.yaml file needs to be created in order for the app to be deployed to Kubernetes.  
 A template is included in the K8S folder. The instances are set up to utilise an existing key pair, so ensure these are set in the variables.
 
 ### Post Terraform
@@ -88,8 +88,8 @@ _aws eks --region xxx update-kubeconfig --name xxx_
 
 ### Database setup
 We will also manually set up the databases(using the endpoints specified in the uri output):
-Copy in/run the Create.sql script in both endpoints to create the test and user databases.
-_mysql -h amazonrdsendpoint -P 3306 -u admin -p_ 
+Copy in/run the Create.sql script in both endpoints to create the test and user databases.  
+_mysql -h amazonrdsendpoint -P 3306 -u admin -p_  
 Copying the sql script in should look similar to below:
 
 ![database][database]
