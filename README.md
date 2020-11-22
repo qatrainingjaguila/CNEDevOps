@@ -86,6 +86,7 @@ _aws eks --region xxx update-kubeconfig --name xxx_
 * To test create the project namespace with _kubectl create ns project_. This is required for the app to deploy to Kubernetes.
 * Retrieve the initial admin password with _cat /var/lib/jenkins/secrets/initialAdminPassword_
 
+### Database setup
 We will also manually set up the databases(using the endpoints specified in the uri output):
 Copy in/run the Create.sql script in both endpoints to create the test and user databases.
 _mysql -h amazonrdsendpoint -P 3306 -u admin -p_ 
@@ -95,14 +96,14 @@ Copying the sql script in should look similar to below:
 
 ### Test VM setup
 Jenkins will need SSH access in order to run the tests on the test vm, so a key pair needs to be created in the jenkins user
-and the public key copied to the .ssh/authorized_keys file in the Test VM to allow this.
-Add the user _ubuntu_ to the docker group.
+and the public key copied to the .ssh/authorized_keys file in the Test VM to allow this.  
+Add the user _ubuntu_ to the docker group.  
 Finally, set the environment variables for DATABASE_URI, TEST_DATABASE_URI and SECRET_KEY in /etc/profile 
 
 ### Jenkins
-Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user
-Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using jenkins_ip:8080/github-webhook/
-Create the secret file credential 'KUBE_SECRET_FILE' and upload your secret.yaml with the new URIs
+Navigate to the Jenkins_IP:8080 and use the initialAdminPassword retrieved from the Jenkins user.  
+Create a new pipeline, using webhooks, and create the corresponding webhook in the settings tab of the git repo using jenkins_ip:8080/github-webhook/  
+Create the secret file credential 'KUBE_SECRET_FILE' and upload your secret.yaml with the new URIs  
 _Credentials > System > Global Credentials > Add credentials_
 
 
