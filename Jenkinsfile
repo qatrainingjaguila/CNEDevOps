@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Run tests') {
       steps {
-      sh "ssh -oStrictHostKeyChecking=no ubuntu@34.241.115.51 /bin/bash < scripts/test.sh"
+      sh "ssh -o StrictHostKeyChecking=no ubuntu@34.241.115.51 < scripts/test.sh"
       sh "ls"
       }
       }
