@@ -8,7 +8,7 @@ The brief provided to us for this project sets the following out as its overall 
 "This application is a simple Flask application, ready to be deployed, for your SFIA2 project."
 The application must:
 * Be deployed to a Virtual Machine for testing
-* Be deployed in a managed Kubernetes CLuster for production
+* Be deployed in a managed Kubernetes Cluster for production
 * Make use of a managed Database solution
 
 In layman's terms this means our applications must use technologies that we have learned over the course of the training in order to continuously test and deploy the application supplied to us.
@@ -41,7 +41,7 @@ The latest image is then pulled down by Kubernetes to update the live applicatio
 ## Application
 The application is a Flask app running in 2 microservices(frontend and backend).
 * When a request is made to the app, the frontend service makes a GET request to the backend service.
-* The backend service using a database connection to quey the database and return a result.
+* The backend service using a database connection to query the database and return a result.
 * The frontend service serving up a simple HTML (index.html) to display the result
 
 
